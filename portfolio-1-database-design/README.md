@@ -24,6 +24,6 @@ date has exactly one staff member on duty.
 ## Files in this folder
 | File | What it is |
 |---|---|
-| Odutayo_Oluwakeyede_ER_Diagram.png | ER diagram of the design |
+| ADS_CA_ER_Diagram.png | ER diagram of the design |
 | schema.sql | MySQL script that creates the database, tables, keys and constraints |
-| Odutayo_Oluwakeyede_Schema_Created.png | Evidence that all eight tables were created |
+| ADS_CA_Schema.png | Evidence that all eight tables were created |
