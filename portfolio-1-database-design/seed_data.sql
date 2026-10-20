@@ -1,0 +1,320 @@
+-- West Haven Hotel and Suites: complete, reproducible sample seed data
+-- MIT 8103 Advanced Database Systems CA
+-- All guest names, phone numbers and emails are fictional. All bookings/payments are simulated.
+--
+-- IMPORTANT:
+-- This script resets the existing SAMPLE DATA in these eight tables before reseeding them.
+-- It does not drop or recreate the database or tables.
+-- Run only against the west_haven_hotel database.
+-- Do not run if you need to preserve real data.
+--
+-- Assumptions:
+-- Room 101-105: Kings (5 rooms), NGN 25,000/night, maximum 2 guests.
+-- Room 106-115: Royal (10 rooms), NGN 35,000/night, maximum 3 guests.
+-- Room 116-117: Suite (2 rooms), NGN 45,000/night, maximum 3 guests.
+-- Room 117 is in maintenance. Rooms 110 and 115 are occupied as of 2026-10-20.
+-- Booking dates cover August-October 2026; a few stays end in early November.
+-- One staff member is assigned to each date, alternating daily. Booking staff IDs match
+-- the staff member on duty on the booking's check-in date.
+-- Missing payment rows represent unpaid bookings; existing rows represent full/partial payments.
+--
+-- A room's status is a snapshot; booking date overlap must still be checked in availability queries.
+
+USE west_haven_hotel;
+START TRANSACTION;
+
+-- Clear dependent/child tables first, then their parent tables.
+DELETE FROM payments;
+DELETE FROM booking_rooms;
+DELETE FROM bookings;
+DELETE FROM staff_shifts;
+DELETE FROM guests;
+DELETE FROM rooms;
+DELETE FROM staff;
+DELETE FROM room_types;
+
+
+
+INSERT INTO room_types (room_type_id, type_name, nightly_rate, max_guests) VALUES
+    (1, 'Kings', 25000.0, 2),
+    (2, 'Royal', 35000.0, 3),
+    (3, 'Suite', 45000.0, 3);
+
+INSERT INTO rooms (room_id, room_number, room_type_id, status) VALUES
+    (1, '101', 1, 'Available'),
+    (2, '102', 1, 'Available'),
+    (3, '103', 1, 'Available'),
+    (4, '104', 1, 'Available'),
+    (5, '105', 1, 'Available'),
+    (6, '106', 2, 'Available'),
+    (7, '107', 2, 'Available'),
+    (8, '108', 2, 'Available'),
+    (9, '109', 2, 'Available'),
+    (10, '110', 2, 'Occupied'),
+    (11, '111', 2, 'Available'),
+    (12, '112', 2, 'Available'),
+    (13, '113', 2, 'Available'),
+    (14, '114', 2, 'Available'),
+    (15, '115', 2, 'Occupied'),
+    (16, '116', 3, 'Available'),
+    (17, '117', 3, 'Maintenance');
+
+INSERT INTO staff (staff_id, full_name, role) VALUES
+    (1, 'Ada Okafor', 'Front Desk Officer'),
+    (2, 'Tunde Adebayo', 'Front Desk Officer');
+
+INSERT INTO staff_shifts (shift_id, staff_id, shift_date) VALUES
+    (1, 1, '2026-08-01'),
+    (2, 2, '2026-08-02'),
+    (3, 1, '2026-08-03'),
+    (4, 2, '2026-08-04'),
+    (5, 1, '2026-08-05'),
+    (6, 2, '2026-08-06'),
+    (7, 1, '2026-08-07'),
+    (8, 2, '2026-08-08'),
+    (9, 1, '2026-08-09'),
+    (10, 2, '2026-08-10'),
+    (11, 1, '2026-08-11'),
+    (12, 2, '2026-08-12'),
+    (13, 1, '2026-08-13'),
+    (14, 2, '2026-08-14'),
+    (15, 1, '2026-08-15'),
+    (16, 2, '2026-08-16'),
+    (17, 1, '2026-08-17'),
+    (18, 2, '2026-08-18'),
+    (19, 1, '2026-08-19'),
+    (20, 2, '2026-08-20'),
+    (21, 1, '2026-08-21'),
+    (22, 2, '2026-08-22'),
+    (23, 1, '2026-08-23'),
+    (24, 2, '2026-08-24'),
+    (25, 1, '2026-08-25'),
+    (26, 2, '2026-08-26'),
+    (27, 1, '2026-08-27'),
+    (28, 2, '2026-08-28'),
+    (29, 1, '2026-08-29'),
+    (30, 2, '2026-08-30'),
+    (31, 1, '2026-08-31'),
+    (32, 2, '2026-09-01'),
+    (33, 1, '2026-09-02'),
+    (34, 2, '2026-09-03'),
+    (35, 1, '2026-09-04'),
+    (36, 2, '2026-09-05'),
+    (37, 1, '2026-09-06'),
+    (38, 2, '2026-09-07'),
+    (39, 1, '2026-09-08'),
+    (40, 2, '2026-09-09'),
+    (41, 1, '2026-09-10'),
+    (42, 2, '2026-09-11'),
+    (43, 1, '2026-09-12'),
+    (44, 2, '2026-09-13'),
+    (45, 1, '2026-09-14'),
+    (46, 2, '2026-09-15'),
+    (47, 1, '2026-09-16'),
+    (48, 2, '2026-09-17'),
+    (49, 1, '2026-09-18'),
+    (50, 2, '2026-09-19'),
+    (51, 1, '2026-09-20'),
+    (52, 2, '2026-09-21'),
+    (53, 1, '2026-09-22'),
+    (54, 2, '2026-09-23'),
+    (55, 1, '2026-09-24'),
+    (56, 2, '2026-09-25'),
+    (57, 1, '2026-09-26'),
+    (58, 2, '2026-09-27'),
+    (59, 1, '2026-09-28'),
+    (60, 2, '2026-09-29'),
+    (61, 1, '2026-09-30'),
+    (62, 2, '2026-10-01'),
+    (63, 1, '2026-10-02'),
+    (64, 2, '2026-10-03'),
+    (65, 1, '2026-10-04'),
+    (66, 2, '2026-10-05'),
+    (67, 1, '2026-10-06'),
+    (68, 2, '2026-10-07'),
+    (69, 1, '2026-10-08'),
+    (70, 2, '2026-10-09'),
+    (71, 1, '2026-10-10'),
+    (72, 2, '2026-10-11'),
+    (73, 1, '2026-10-12'),
+    (74, 2, '2026-10-13'),
+    (75, 1, '2026-10-14'),
+    (76, 2, '2026-10-15'),
+    (77, 1, '2026-10-16'),
+    (78, 2, '2026-10-17'),
+    (79, 1, '2026-10-18'),
+    (80, 2, '2026-10-19'),
+    (81, 1, '2026-10-20'),
+    (82, 2, '2026-10-21'),
+    (83, 1, '2026-10-22'),
+    (84, 2, '2026-10-23'),
+    (85, 1, '2026-10-24'),
+    (86, 2, '2026-10-25'),
+    (87, 1, '2026-10-26'),
+    (88, 2, '2026-10-27'),
+    (89, 1, '2026-10-28'),
+    (90, 2, '2026-10-29'),
+    (91, 1, '2026-10-30'),
+    (92, 2, '2026-10-31');
+
+INSERT INTO guests (guest_id, full_name, phone, email) VALUES
+    (1, 'Amara Eze', '08030001001', 'amara.eze@example.com'),
+    (2, 'Chinedu Okafor', '08030001002', 'chinedu.okafor@example.com'),
+    (3, 'Zainab Bello', '08030001003', 'zainab.bello@example.com'),
+    (4, 'Tomi Adeyemi', '08030001004', 'tomi.adeyemi@example.com'),
+    (5, 'Ibrahim Musa', '08030001005', 'ibrahim.musa@example.com'),
+    (6, 'Ngozi Nwosu', '08030001006', 'ngozi.nwosu@example.com'),
+    (7, 'Femi Akinyemi', '08030001007', 'femi.akinyemi@example.com'),
+    (8, 'Hadiza Yusuf', '08030001008', 'hadiza.yusuf@example.com'),
+    (9, 'Kelechi Obi', '08030001009', 'kelechi.obi@example.com'),
+    (10, 'Bisi Alabi', '08030001010', 'bisi.alabi@example.com'),
+    (11, 'Seyi Balogun', '08030001011', 'seyi.balogun@example.com'),
+    (12, 'Maryam Sani', '08030001012', 'maryam.sani@example.com'),
+    (13, 'Daniel Etim', '08030001013', 'daniel.etim@example.com'),
+    (14, 'Efe Oghene', '08030001014', 'efe.oghene@example.com'),
+    (15, 'Ruth Ibe', '08030001015', 'ruth.ibe@example.com'),
+    (16, 'Kunle Ajayi', '08030001016', 'kunle.ajayi@example.com'),
+    (17, 'Aisha Garba', '08030001017', 'aisha.garba@example.com'),
+    (18, 'Emeka Umeh', '08030001018', 'emeka.umeh@example.com'),
+    (19, 'Tara Johnson', '08030001019', 'tara.johnson@example.com'),
+    (20, 'Yusuf Lawal', '08030001020', 'yusuf.lawal@example.com'),
+    (21, 'Ifeoma Chukwu', '08030001021', 'ifeoma.chukwu@example.com'),
+    (22, 'Musa Abdullahi', '08030001022', 'musa.abdullahi@example.com'),
+    (23, 'Nneka Eze', '08030001023', 'nneka.eze@example.com'),
+    (24, 'David Ojo', '08030001024', 'david.ojo@example.com'),
+    (25, 'Fatima Shehu', '08030001025', 'fatima.shehu@example.com'),
+    (26, 'Lara Ogunleye', '08030001026', 'lara.ogunleye@example.com'),
+    (27, 'Samuel Nwachukwu', '08030001027', 'samuel.nwachukwu@example.com'),
+    (28, 'Amina Ibrahim', '08030001028', 'amina.ibrahim@example.com'),
+    (29, 'Oluwaseun Dada', '08030001029', 'oluwaseun.dada@example.com'),
+    (30, 'Grace Mensah', '08030001030', 'grace.mensah@example.com'),
+    (31, 'Peter Ekanem', '08030001031', 'peter.ekanem@example.com'),
+    (32, 'Mariam Usman', '08030001032', 'mariam.usman@example.com'),
+    (33, 'Tobi Afolabi', '08030001033', 'tobi.afolabi@example.com'),
+    (34, 'Chika Onuoha', '08030001034', 'chika.onuoha@example.com'),
+    (35, 'Bola Fashola', '08030001035', 'bola.fashola@example.com'),
+    (36, 'Abdul Kareem', '08030001036', 'abdul.kareem@example.com'),
+    (37, 'Esther Edet', '08030001037', 'esther.edet@example.com'),
+    (38, 'Michael Udo', '08030001038', 'michael.udo@example.com'),
+    (39, 'Sade Oladipo', '08030001039', 'sade.oladipo@example.com'),
+    (40, 'Yemi Akinola', '08030001040', 'yemi.akinola@example.com');
+
+INSERT INTO bookings (booking_id, guest_id, staff_id, check_in_date, check_out_date, status) VALUES
+    (1, 1, 2, '2026-08-02', '2026-08-04', 'Checked-out'),
+    (2, 2, 1, '2026-08-03', '2026-08-06', 'Checked-out'),
+    (3, 3, 2, '2026-08-04', '2026-08-07', 'Checked-out'),
+    (4, 4, 1, '2026-08-05', '2026-08-08', 'Checked-out'),
+    (5, 5, 1, '2026-08-07', '2026-08-09', 'Checked-out'),
+    (6, 6, 1, '2026-08-09', '2026-08-12', 'Checked-out'),
+    (7, 7, 2, '2026-08-10', '2026-08-13', 'Checked-out'),
+    (8, 8, 1, '2026-08-13', '2026-08-15', 'Checked-out'),
+    (9, 9, 1, '2026-08-15', '2026-08-18', 'Checked-out'),
+    (10, 10, 1, '2026-08-17', '2026-08-20', 'Checked-out'),
+    (11, 11, 1, '2026-08-19', '2026-08-22', 'Checked-out'),
+    (12, 12, 1, '2026-08-21', '2026-08-24', 'Checked-out'),
+    (13, 13, 2, '2026-08-24', '2026-08-27', 'Checked-out'),
+    (14, 14, 2, '2026-08-26', '2026-08-29', 'Checked-out'),
+    (15, 15, 2, '2026-08-28', '2026-08-31', 'Checked-out'),
+    (16, 16, 2, '2026-09-01', '2026-09-04', 'Checked-out'),
+    (17, 17, 2, '2026-09-05', '2026-09-08', 'Checked-out'),
+    (18, 18, 2, '2026-09-07', '2026-09-10', 'Checked-out'),
+    (19, 19, 2, '2026-09-09', '2026-09-12', 'Checked-out'),
+    (20, 20, 1, '2026-09-12', '2026-09-15', 'Checked-out'),
+    (21, 21, 1, '2026-09-16', '2026-09-19', 'Checked-out'),
+    (22, 22, 1, '2026-09-20', '2026-09-23', 'Checked-out'),
+    (23, 23, 1, '2026-09-24', '2026-09-27', 'Checked-out'),
+    (24, 24, 1, '2026-09-28', '2026-10-01', 'Checked-out'),
+    (25, 25, 1, '2026-10-02', '2026-10-05', 'Checked-out'),
+    (26, 26, 2, '2026-10-05', '2026-10-08', 'Checked-out'),
+    (27, 27, 1, '2026-10-08', '2026-10-11', 'Checked-out'),
+    (28, 28, 2, '2026-10-11', '2026-10-14', 'Checked-out'),
+    (29, 29, 1, '2026-10-14', '2026-10-17', 'Checked-out'),
+    (30, 30, 2, '2026-10-17', '2026-10-19', 'Checked-out'),
+    (31, 31, 1, '2026-10-18', '2026-10-22', 'Checked-in'),
+    (32, 32, 2, '2026-10-19', '2026-10-23', 'Checked-in'),
+    (33, 33, 2, '2026-10-21', '2026-10-24', 'Reserved'),
+    (34, 34, 1, '2026-10-22', '2026-10-25', 'Reserved'),
+    (35, 35, 1, '2026-10-24', '2026-10-27', 'Reserved'),
+    (36, 36, 1, '2026-10-26', '2026-10-29', 'Reserved'),
+    (37, 37, 1, '2026-10-28', '2026-10-30', 'Reserved'),
+    (38, 38, 1, '2026-10-30', '2026-11-02', 'Reserved'),
+    (39, 39, 2, '2026-10-31', '2026-11-03', 'Reserved'),
+    (40, 40, 1, '2026-10-20', '2026-10-22', 'Cancelled');
+
+INSERT INTO booking_rooms (booking_room_id, booking_id, room_id, rate_charged) VALUES
+    (1, 1, 1, 25000.0),
+    (2, 2, 6, 35000.0),
+    (3, 3, 11, 35000.0),
+    (4, 4, 16, 45000.0),
+    (5, 5, 2, 25000.0),
+    (6, 6, 7, 35000.0),
+    (7, 7, 12, 35000.0),
+    (8, 8, 3, 25000.0),
+    (9, 9, 8, 35000.0),
+    (10, 10, 13, 35000.0),
+    (11, 11, 4, 25000.0),
+    (12, 12, 9, 35000.0),
+    (13, 13, 14, 35000.0),
+    (14, 14, 5, 25000.0),
+    (15, 15, 10, 35000.0),
+    (16, 16, 15, 35000.0),
+    (17, 17, 1, 25000.0),
+    (18, 18, 6, 35000.0),
+    (19, 19, 11, 35000.0),
+    (20, 20, 16, 45000.0),
+    (21, 21, 2, 25000.0),
+    (22, 22, 7, 35000.0),
+    (23, 23, 12, 35000.0),
+    (24, 24, 3, 25000.0),
+    (25, 25, 8, 35000.0),
+    (26, 26, 13, 35000.0),
+    (27, 27, 4, 25000.0),
+    (28, 28, 9, 35000.0),
+    (29, 29, 14, 35000.0),
+    (30, 30, 5, 25000.0),
+    (31, 31, 10, 35000.0),
+    (32, 32, 15, 35000.0),
+    (33, 33, 1, 25000.0),
+    (34, 34, 6, 35000.0),
+    (35, 35, 11, 35000.0),
+    (36, 36, 16, 45000.0),
+    (37, 37, 2, 25000.0),
+    (38, 38, 7, 35000.0),
+    (39, 39, 12, 35000.0),
+    (40, 40, 3, 25000.0);
+
+INSERT INTO payments (payment_id, booking_id, amount, method, paid_at) VALUES
+    (1, 1, 50000.0, 'Transfer', '2026-08-03 15:00:00'),
+    (2, 2, 52500.0, 'Card', '2026-08-05 15:00:00'),
+    (3, 3, 105000.0, 'Cash', '2026-08-06 15:00:00'),
+    (4, 5, 50000.0, 'Card', '2026-08-08 15:00:00'),
+    (5, 6, 52500.0, 'Cash', '2026-08-11 15:00:00'),
+    (6, 7, 105000.0, 'Transfer', '2026-08-12 15:00:00'),
+    (7, 8, 50000.0, 'Card', '2026-08-14 15:00:00'),
+    (8, 10, 105000.0, 'Transfer', '2026-08-19 15:00:00'),
+    (9, 11, 37500.0, 'Card', '2026-08-21 15:00:00'),
+    (10, 12, 105000.0, 'Cash', '2026-08-23 15:00:00'),
+    (11, 13, 105000.0, 'Transfer', '2026-08-26 15:00:00'),
+    (12, 15, 105000.0, 'Cash', '2026-08-30 15:00:00'),
+    (13, 16, 52500.0, 'Transfer', '2026-09-03 15:00:00'),
+    (14, 17, 75000.0, 'Card', '2026-09-07 15:00:00'),
+    (15, 18, 105000.0, 'Cash', '2026-09-09 15:00:00'),
+    (16, 19, 52500.0, 'Transfer', '2026-09-11 15:00:00'),
+    (17, 20, 135000.0, 'Card', '2026-09-14 15:00:00'),
+    (18, 22, 105000.0, 'Transfer', '2026-09-22 15:00:00'),
+    (19, 23, 52500.0, 'Card', '2026-09-26 15:00:00'),
+    (20, 24, 75000.0, 'Cash', '2026-09-30 15:00:00'),
+    (21, 25, 105000.0, 'Transfer', '2026-10-04 15:00:00'),
+    (22, 26, 52500.0, 'Card', '2026-10-07 15:00:00'),
+    (23, 27, 75000.0, 'Cash', '2026-10-10 15:00:00'),
+    (24, 29, 105000.0, 'Card', '2026-10-16 15:00:00'),
+    (25, 30, 25000.0, 'Cash', '2026-10-18 15:00:00'),
+    (26, 31, 70000.0, 'Transfer', '2026-10-21 15:00:00'),
+    (27, 33, 37500.0, 'Cash', '2026-10-23 15:00:00'),
+    (28, 35, 105000.0, 'Card', '2026-10-26 15:00:00'),
+    (29, 36, 67500.0, 'Cash', '2026-10-28 15:00:00'),
+    (30, 38, 105000.0, 'Card', '2026-11-01 15:00:00'),
+    (31, 39, 52500.0, 'Cash', '2026-11-02 15:00:00');
+
+
+COMMIT;
