@@ -25,3 +25,9 @@ Each folder has its own README explaining what was done and how it was tested.
 
 ## Progress
 Work is committed progressively through the semester.
+
+## AI Use Declaration
+
+AI tools were used as learning and development aids during the implementation of this portfolio. They assisted with understanding MongoDB concepts, developing Python scripts, troubleshooting errors and explaining database operations.
+
+The scripts and outputs were reviewed and tested during implementation by me, Oluwakeyede Odutayo. 
