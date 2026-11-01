@@ -1,0 +1,103 @@
+PS C:\Users\HomePC\Documents\advanced-database-portfolio\portfolio-4-nosql> py query_bookings.py 
+
+1. CHECKED-OUT BOOKINGS
+1 Amara Eze
+2 Chinedu Okafor
+3 Zainab Bello
+4 Tomi Adeyemi
+5 Ibrahim Musa
+6 Ngozi Nwosu
+7 Femi Akinyemi
+8 Hadiza Yusuf
+9 Kelechi Obi
+10 Bisi Alabi
+11 Seyi Balogun
+12 Maryam Sani
+13 Daniel Etim
+14 Efe Oghene
+15 Ruth Ibe
+16 Kunle Ajayi
+17 Aisha Garba
+18 Emeka Umeh
+19 Tara Johnson
+20 Yusuf Lawal
+21 Ifeoma Chukwu
+22 Musa Abdullahi
+23 Nneka Eze
+24 David Ojo
+25 Fatima Shehu
+26 Lara Ogunleye
+27 Samuel Nwachukwu
+28 Amina Ibrahim
+29 Oluwaseun Dada
+30 Grace Mensah
+
+2. BOOKINGS FOR AMARA EZE
+{'_id': ObjectId('6ae722ff1c0fc3396483a277'),
+ 'booking': {'check_in_date': datetime.datetime(2026, 8, 2, 0, 0),
+             'check_out_date': datetime.datetime(2026, 8, 4, 0, 0),
+             'staff': {'full_name': 'Tunde Adebayo',
+                       'role': 'Front Desk Officer',
+                       'staff_id': 2},
+             'status': 'Checked-out'},
+ 'booking_id': 1,
+ 'guest': {'email': 'amara.eze@example.com',
+           'full_name': 'Amara Eze',
+           'guest_id': 1,
+           'phone': '08030001001'},
+ 'payments': [{'amount': 50000.0,
+               'method': 'Transfer',
+               'paid_at': datetime.datetime(2026, 8, 3, 14, 39, 6),
+               'payment_id': 1}],
+ 'rooms': [{'max_guests': 2,
+            'nightly_rate': 25000.0,
+            'rate_charged': 25000.0,
+            'room_id': 1,
+            'room_number': '101',
+            'room_status': 'Available',
+            'room_type': 'Kings'}]}
+
+3. KINGS ROOM BOOKINGS
+1 Amara Eze
+5 Ibrahim Musa
+8 Hadiza Yusuf
+11 Seyi Balogun
+14 Efe Oghene
+17 Aisha Garba
+21 Ifeoma Chukwu
+24 David Ojo
+27 Samuel Nwachukwu
+30 Grace Mensah
+33 Tobi Afolabi
+37 Esther Edet
+40 Yemi Akinola
+
+4. PAYMENTS ABOVE ₦40,000
+1 Amara Eze
+2 Chinedu Okafor
+3 Zainab Bello
+5 Ibrahim Musa
+6 Ngozi Nwosu
+7 Femi Akinyemi
+8 Hadiza Yusuf
+10 Bisi Alabi
+12 Maryam Sani
+13 Daniel Etim
+15 Ruth Ibe
+16 Kunle Ajayi
+17 Aisha Garba
+18 Emeka Umeh
+19 Tara Johnson
+20 Yusuf Lawal
+22 Musa Abdullahi
+23 Nneka Eze
+24 David Ojo
+25 Fatima Shehu
+26 Lara Ogunleye
+27 Samuel Nwachukwu
+29 Oluwaseun Dada
+31 Peter Ekanem
+35 Bola Fashola
+36 Abdul Kareem
+38 Michael Udo
+39 Sade Oladipo
