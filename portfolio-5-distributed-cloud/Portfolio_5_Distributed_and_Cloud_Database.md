@@ -4,7 +4,7 @@
 
 Portfolio 5 shows how cloud platforms and services can support the operations of West Haven Hotel & Suites. Some examples are Amazon Web Services (AWS), Cloudflare, and MongoDB Atlas. This portfolio builds on the MongoDB database from Portfolio 4 and shows how distributed database concepts can improve availability, scalability, and reliability.
 
-A MongoDB Atlas cluster named `WestHavenCluster` was created under the West Haven Hotel project. Using a Python script, I migrated 40 booking documents into the `west_haven_hotel` database. These documents were stored in the `bookings` collection created within the database. The 40 documents contained booking information, including guest details, room information, payment records, and booking status.
+During Portfolio 4, I created a MongoDB Atlas cluster named `WestHavenCluster` under the West Haven Hotel project. Using a Python script, I migrated 40 booking documents into the `west_haven_hotel` database. These documents were stored in the `bookings` collection. The 40 documents contained booking information, including guest details, room information, payment records, and booking status. The successful connection and practical work from Portfolio 4 provided the foundation for this exercise.
 
 ## 2. Replication
 
@@ -18,13 +18,15 @@ Replication is useful when working with a database because it helps to keep the 
 
 ## 4. Sharding and Scalability
 
-Sharding is similar to topology in networking. It is a technique used to distribute data across multiple servers or nodes. It supports horizontal scaling, especially when a database grows beyond the capacity of a single server. For West Haven Hotel, sharding could become useful if the business expands to different locations and the number of bookings increases beyond what a single server can handle. A shard key could be based on a common attribute, such as the hotel location or a unique identifier. Although I was not able to practise sharding during this practical exercise, I was still able to read about it and understand its usefulness in database system architecture.
+Sharding reminds me of topology in networking. It is a technique used to distribute data across multiple servers or nodes. It supports horizontal scaling, especially when a database grows beyond the capacity of a single server. For West Haven Hotel, sharding could become useful if the business expands to different locations and the number of bookings increases beyond what a single server can handle. A shard key could be based on a common attribute, such as the hotel location or a unique identifier. Although I was not able to practise sharding during this practical exercise, I was still able to read about it and understand its usefulness in database system architecture.
 
 ## 5. Deployment Testing and Limitations
 
-The MongoDB Atlas cluster was successfully created, and the 40 booking documents from the database developed in Portfolio 1 were imported into the collection. After this, I carried out a connectivity check to confirm that I could connect to the database and access the documents. However, I encountered a connectivity error during the check, which prevented me from completing the process successfully.
+The MongoDB Atlas cluster had already been created and populated with 40 booking documents during Portfolio 4. I was also able to connect to Atlas successfully after resolving an earlier connection issue by adding my IP address to the Atlas IP access list. This allowed me to complete the MongoDB practical activities in Portfolio 4.
 
-I tried to understand the error with the help of an AI tool, which helped me identify it as a connectivity issue. Since I could not resolve the problem and time was running out, I decided to focus on explaining the distributed database concepts I had learned through my research. This was also in line with the CA instructions, which allowed us to explain the concepts through research if we were unable to complete the practical deployment.
+When I moved on to Portfolio 5, I attempted to reconnect to the Atlas database so I could continue with the practical activities on replication and sharding. However, I encountered another connectivity problem during the reconnection attempt. Due to the network difficulties and the time available for the assessment, I could not proceed with the practical testing of these concepts.
+
+I then focused on researching and explaining how replication, consistency, failover, and sharding work in MongoDB Atlas. This was also in line with the CA instructions, which allowed us to explain the concepts through research if we were unable to complete the practical deployment. The replication and sharding concepts discussed in this portfolio were not tested practically on my cluster.
 
 ## 6. Conclusion
 
