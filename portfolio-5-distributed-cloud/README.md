@@ -10,6 +10,7 @@ This portfolio explores how distributed and cloud database concepts can support 
 
 ## Database Details
 - Database: `west_haven_hotel`
+- Cluster: `WestHavenCluster`
 - Collection: `bookings`
 - Records migrated: 40 booking documents
 
@@ -20,6 +21,9 @@ This portfolio explores how distributed and cloud database concepts can support 
 - Cloud database deployment
 
 ## Limitations
-The Atlas cluster was created and populated successfully. However, a connectivity issue prevented further practical testing of replication and failover. The remaining concepts were covered through research.
+
+During Portfolio 5, I attempted to reconnect to the existing MongoDB Atlas database to continue with practical activities on replication and sharding. However, I encountered another connectivity problem during the reconnection attempt. Due to the network difficulties and the time available for the assessment, I could not proceed with the practical testing of these concepts.
+
+The remaining concepts were researched and explained in the portfolio document. Replication and sharding were not practically tested on my cluster.
 
 See the portfolio document for the full explanation and supporting evidence.
