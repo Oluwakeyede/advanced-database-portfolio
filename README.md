@@ -14,8 +14,8 @@ The same case study is used across all five portfolio activities.
 
 ## FILES IN THIS FOLDER
 
-- `Odutayo_Oluwakeyede_STUDENTID_Documentation.pdf` – 2 to 3-page portfolio documentation.
-- `Odutayo_Oluwakeyede_STUDENTID_README.txt` – This file.
+- `Odutayo_Oluwakeyede_301907379_Documentation.pdf` – 2 to 3-page portfolio documentation.
+- `Odutayo_Oluwakeyede_301907379_README.txt` – This file.
 
 ## REPOSITORY STRUCTURE
 
